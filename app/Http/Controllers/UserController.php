@@ -96,7 +96,7 @@ class UserController extends Controller
         $count = User::where('email', '=', $userEmail)->where('otp', '=', $otp)->count();
         if ($count === 1) {
             User::where('email', '=', $userEmail)->update(['otp' => '0']);
-            $token = JWTToken::CreateToken($request->input('email'));;
+            $token = JWTToken::CreateTokenForSetPassword($request->input('email'));;
             return response()->json(['status' => "success", 'message' => "OTP Verified successfully"], 200)->cookie('token', $token, 60 * 60 * 24);
         } else {
             return response()->json(['status' => "fail", 'message' => "unauthorised"], 401);
