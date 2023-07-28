@@ -36,4 +36,6 @@ Route::get('/userLogin', [UserController::class, 'UserLoginPage']);
 Route::get('/sendOtp', [UserController::class, 'SendOTPCodePage']);
 Route::get('/verifyOtp', [UserController::class, 'VerifyOTPPage']);
 Route::get('/resetPassword', [UserController::class, 'ResetPasswordPage']);
-Route::get('/dashboard', [UserController::class, 'DashboardPage']);
+
+//after auth
+Route::get('/dashboard', [UserController::class, 'DashboardPage'])->middleware(TokenVerificationMiddleware::class);
