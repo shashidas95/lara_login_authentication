@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         $count = User::where('email', '=', $request->input('email'))
             ->where('password', '=', $request->input('password'))
-            ->count();
+             ->select('id')->first();
         if ($count == 1) {
             $token = JWTToken::CreateToken($request->input('email'));
             return response()->json([
