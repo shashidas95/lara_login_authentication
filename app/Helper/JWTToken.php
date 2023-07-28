@@ -17,9 +17,7 @@ class JWTToken
             'iat' => time(),
             'exp' => time() + 60 * 60,
             'userEmail' => $userEmail,
-               'user' => $userId,
-
-
+               'userId' => $userId,
         ];
         return $token = JWT::encode($payload, $key, 'HS256');
     }
@@ -41,6 +39,7 @@ class JWTToken
             'iat' => time(),
             'exp' => time() + 60 * 60,
             'userEmail' => $userEmail,
+              'userId' => '0',
 
         ];
         return $token = JWT::encode($payload, $key, 'HS256');
@@ -53,7 +52,7 @@ class JWTToken
             } else {
                 $key = env('JWT_KEY');
                 $decoded = JWT::decode($token, new Key($key, 'HS256'));
-                return $decoded->userEmail;
+                return $decoded;
             }
         } catch (Exception $e) {
             return 'unauthorised';
