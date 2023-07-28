@@ -67,7 +67,7 @@ class UserController extends Controller
             ->where('password', '=', $request->input('password'))
              ->select('id')->first();
         if ($count !== null) {
-            $token = JWTToken::CreateToken($request->input('email'));
+       $token = JWTToken::CreateToken($request->input('email'), $count->id);
             return response()->json([
                 'status' => "success", 'message' => 'User Logged in successfully',
                 // 'token'=>$token //for sending  through body instead of cookie
