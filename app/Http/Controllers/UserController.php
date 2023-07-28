@@ -115,4 +115,9 @@ class UserController extends Controller
             return response()->json(['status' => "fail", 'message' => "unauthorised"], 401);
         }
     }
+    
+    public function userLogout(Request $request)
+    {
+        return redirect('/userLogin')->cookie('token', '', -1);
+    }
 }
